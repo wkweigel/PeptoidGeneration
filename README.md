@@ -9,7 +9,7 @@ See the incuded noteboof for an example of intended use.
     2. Amide Coupling: The a-amino intermediate is coupled with the next unit of haloacetic acid.
 
 To prevent cross reactivity, the smiles of the monomers need to protected:
-* Amines not the intended as the reaction center need to be Boc protected.
+* Amines not intended as the reaction center need to be Boc protected.
 * Carboxylic acids must be protected as the t-butyl ester. 
 
 The generator will perform a final global deprotection of these groups.
