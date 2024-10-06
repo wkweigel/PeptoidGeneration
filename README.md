@@ -1,7 +1,7 @@
 # PeptoidGeneration
 Generate peptoid SMILES from amine building blocks (monomers).
 
-See the incuded noteboof for an example of intended use.
+See the incuded notebook for an example of intended use.
 * The amine monomers are input as a dictionary of smiles keyed by single-letter code for each monomer.
 * The generator accepts a string representing the sequence of the desired peptoid.
 * Peptoid generation is performed using iterative synthesis cycles akin to what is done in real-life:
