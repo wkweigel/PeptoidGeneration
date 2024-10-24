@@ -26,6 +26,8 @@ class Reaction:
         self.Ar_boc_deprotection_smarts='[n:1]C(=O)OC(C)(C)(C)>>[nH:1]'
         self.ester_deprotection_smarts='[CX3:1](=[OX1:2])-[OX2:3]-[C](C)(C)(C)>>[C:1](=[O:2])-[O:3]'
         self.alcohol_deprotection_smarts='[*:1]-[OX2:3]-[C](C)(C)(C)>>[*:1]-[O:3]'
+        self.intramolecular_click_smarts = '([C:1]#[$([CH1]):2].[$([#6]-N=[N+]=[-N]),$([#6]-[N-]-[N+]#N):3]-N~N~N)>>[*:3]n1[c:2][c:1]nn1'
+        #self.intramolecular_click_smarts = '[C:1]#[C:2].[N:3]=[N+:4]=[N-:5]>>[C:1]1[C:2][N:3][N:4][N:5]1'
 
         #Create reactions from the SMARTS
         self.displacement_reaction=AllChem.ReactionFromSmarts(self.displacement_smarts)
@@ -35,6 +37,7 @@ class Reaction:
         self.Ar_boc_deprotection_reaction=AllChem.ReactionFromSmarts(self.Ar_boc_deprotection_smarts)
         self.ester_deprotection_reaction=AllChem.ReactionFromSmarts(self.ester_deprotection_smarts)
         self.alcohol_deprotection_reaction=AllChem.ReactionFromSmarts(self.alcohol_deprotection_smarts)
+        self.intramolecular_click_reaction=AllChem.ReactionFromSmarts(self.intramolecular_click_smarts)
 
         #Create mol for bromoacetic acid 
         self.bromoacetic_acid_smiles='OC(CBr)=O'
@@ -80,6 +83,17 @@ class Reaction:
         #Convert the product to smiles
         product_smiles=Chem.MolToSmiles(product[0][0])
         return(product_smiles)
+    
+    def intramolecular_click(self, cuaac_intermediate:str):
+        #create the mol
+        acyclic_mol = Chem.MolFromSmiles(cuaac_intermediate)
+
+        #run the reaction
+        product = self.intramolecular_click_reaction.RunReactants([acyclic_mol])
+
+        #Convert the product to smiles
+        product_smiles=Chem.MolToSmiles(product[0][0])
+        return(product_smiles)
 
     def deprotect_peptoid(self, protected_peptoid_sequence:str, protected_peptoid_smiles:str):
 
@@ -121,3 +135,4 @@ class Reaction:
         self.int_deprotected_smiles=Chem.MolToSmiles(self.int_deprotected_mol)
 
         return(self.int_deprotected_smiles)
+
