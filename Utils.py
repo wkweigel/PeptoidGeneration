@@ -92,6 +92,7 @@ def cyclic_peptoid_smiles_from_string(peptoid_string:str, peptoid_dict:dict):
 
     if peptoid_string[-1] == 'X':
         peptoid.int_halide_smiles=peptoid.amine_displacement(peptoid_dict['Q'],peptoid.int_halide_smiles)
+        peptoid.int_halide_smiles=peptoid.intramolecular_click(peptoid.int_halide_smiles)
         final_peptoid=peptoid.deprotect_peptoid(peptoid_string, peptoid.int_halide_smiles)
     else:
         final_peptoid=peptoid.deprotect_peptoid(peptoid_string, peptoid.int_amine_smiles)
